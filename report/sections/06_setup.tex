@@ -1,0 +1,32 @@
+\section{Evaluation Metrics and Experimental Setup}
+
+The evaluation protocol follows the current repository state. The model is evaluated on the grouped test set of 2{,}004 images. Reported metrics include accuracy, macro and weighted precision/recall/F1, class-wise scores, a normalized confusion matrix, and one-vs-rest ROC and precision--recall curves.
+
+The main settings are summarized in Table~\ref{tab:setup}. All images are resized to \(224\times224\). Training uses random flips, rotation, and color jitter, while testing and deployment use deterministic resize and normalization. The classifier is optimized with cross-entropy loss and Adam. During live inference, the backend returns the maximum softmax score and applies a confidence threshold of 0.5.
+
+\begin{table}[H]
+    \centering
+    \caption{Key implementation and evaluation settings.}
+    \label{tab:setup}
+    \begin{tabular}{ll}
+        \toprule
+        Item & Current setting \\
+        \midrule
+        Task & Seven-class skin lesion classification \\
+        Backbone & ResNet18 with SE-style channel attention \\
+        Input size & \(224\times224\) RGB \\
+        Training augmentation & Flip, rotation, color jitter \\
+        Normalization & ImageNet mean and std \\
+        Loss function & Cross-entropy \\
+        Optimizer & Adam \\
+        Learning rate & 0.001 \\
+        Scheduler & Cosine annealing, minimum \(10^{-6}\) \\
+        Batch size & 32 \\
+        Epoch setting & 30 epochs \\
+        Evaluation split & Grouped test set, 2{,}004 images \\
+        Deployment threshold & Confidence \(<0.5\) marked unrecognized \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+One methodological caution is necessary. The repository contains a valid current grouped split, but the provided model weight file predates the latest refreshed train and test organization. The reported numbers therefore represent the best available project snapshot on the current split rather than a fully controlled retraining run. A final version of the study should retrain and select checkpoints under the current split definition.

@@ -1,0 +1,60 @@
+{
+  "totals": {
+    "training_images": 8011,
+    "testing_images": 2004,
+    "training_lesions": 5975,
+    "testing_lesions": 1495,
+    "image_overlap": 0,
+    "lesion_overlap": 0
+  },
+  "class_counts": {
+    "training": {
+      "akiec": 261,
+      "bcc": 411,
+      "bkl": 879,
+      "df": 92,
+      "mel": 891,
+      "nv": 5364,
+      "vasc": 113
+    },
+    "testing": {
+      "akiec": 66,
+      "bcc": 103,
+      "bkl": 220,
+      "df": 23,
+      "mel": 222,
+      "nv": 1341,
+      "vasc": 29
+    }
+  },
+  "metadata": {
+    "sex": {
+      "male": 5406,
+      "female": 4552,
+      "unknown": 57
+    },
+    "localization_top10": {
+      "back": 2192,
+      "lower extremity": 2077,
+      "trunk": 1404,
+      "upper extremity": 1118,
+      "abdomen": 1022,
+      "face": 745,
+      "chest": 407,
+      "foot": 319,
+      "unknown": 234,
+      "neck": 168
+    },
+    "dx_type": {
+      "histo": 5340,
+      "follow_up": 3704,
+      "consensus": 902,
+      "confocal": 69
+    },
+    "age_non_null": 9958,
+    "age_median": 50.0
+  },
+  "image_sizes": {
+    "600x450": 10015
+  }
+}

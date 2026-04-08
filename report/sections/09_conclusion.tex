@@ -1,0 +1,9 @@
+\section{Conclusion and Future Work}
+
+This project presents a complete local pipeline for skin lesion image classification built around HAM10000, a ResNet18-based classifier with channel attention, and a browser-accessible FastAPI interface. The current implementation organizes the data into a grouped train--test split, applies standard preprocessing and augmentation, evaluates the model with class-aware metrics, and exposes the predictor through a lightweight web service. The best available project snapshot reaches 0.92 accuracy on the current grouped test set and supports stable local inference with prediction history.
+
+The project is valuable because it connects dataset preparation, model design, evaluation, and deployment in one coherent workflow. The same inspection also makes the next steps clear.
+
+Future work should focus on three related areas. First, the training pipeline needs a dedicated validation stage and a retraining run on the current grouped split so that checkpoint selection, reported metrics, and prepared data remain aligned. Better handling of class imbalance would also help the smallest classes and melanoma.
+
+Second, the system can be extended without changing its overall design. Useful additions include batch upload, filtered history browsing, exported prediction logs, clearer error handling, simple visual explanations, and stronger experiment tracking with saved training curves and checkpoint metadata.

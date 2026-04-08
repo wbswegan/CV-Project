@@ -1,0 +1,33 @@
+\section{Algorithm and Implementation Details}
+
+The project uses a ResNet18 image classifier \citep{he2016resnet} with a squeeze-and-excitation style channel attention block \citep{hu2018senet}. Training uses pretrained torchvision weights and a task-specific seven-class head. The implementation is written in PyTorch \citep{paszke2019pytorch} for single-image dermoscopic classification.
+
+\begin{table}[H]
+    \centering
+    \caption{Current algorithm summary.}
+    \label{tab:algorithm}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{0.28\textwidth} >{\raggedright\arraybackslash}p{0.62\textwidth}}
+        \toprule
+        Component & Current implementation \\
+        \midrule
+        Task type & Seven-class classification \\
+        Input & One RGB dermoscopic image \\
+        Backbone & ResNet18 \\
+        Training strategy & Transfer learning \\
+        Attention module & SE-style channel attention \\
+        Classifier head & 512$\rightarrow$256$\rightarrow$7 with ReLU and Dropout(0.4) \\
+        Image preprocessing & Resize \(224\times224\), tensor, ImageNet normalization \\
+        Training augmentation & H/V flips, 20$^\circ$ rotation, mild color jitter \\
+        Loss function & Cross-entropy \\
+        Optimizer & Adam \\
+        Learning-rate schedule & Cosine annealing, minimum \(10^{-6}\) \\
+        Batch size and epochs & 32, 30 \\
+        Inference rule & Top-1 softmax with confidence \\
+        Extra deployment logic & Blank-image heuristic, threshold 0.5 \\
+        Main strength & Compact and deployable \\
+        Main limitation & No validation stage, class imbalance \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+This design balances standard transfer learning with lightweight deployment. Its main limits are unchanged: the model predicts one label per image, does not localize lesions, and returns confidence scores that are not formally calibrated.

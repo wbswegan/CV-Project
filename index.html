@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDS540 Skin Lesion Classification Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CDS540 Skin Lesion Classification Demo</h1>
+            <p class="subtitle">Attention-enhanced ResNet18 for HAM10000 skin lesion images</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-tips">
+                    <p>
+                        [Hint] <strong>Upload suggestions:</strong><br>
+                        Use a close-up image of the skin lesion with good lighting and clear focus. Avoid screenshots, documents, or images with large text overlays.
+                    </p>
+                </div>
+
+                <div id="drop-zone" class="drop-zone">
+                    <div class="dz-content">
+                        <i class="upload-icon">[Upload]</i>
+                        <p>Drag a skin lesion image here</p>
+                        <span>Or <strong>click here</strong> to choose a file</span>
+                    </div>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                    <img id="preview" src="#" alt="Preview image" hidden>
+                </div>
+
+                <div class="controls">
+                    <button id="upload-btn" class="btn-primary" disabled>Start AI diagnosis</button>
+                    <button id="reset-btn" class="btn-secondary">Reset</button>
+                </div>
+            </section>
+
+            <section id="result-container" class="result-card" hidden>
+                <div class="result-header">
+                    <h3>Analysis report</h3>
+                    <span id="status-tag" class="tag">Waiting for prediction</span>
+                </div>
+                <div class="result-body">
+                    <div class="res-item">
+                        <span class="label">Predicted class:</span>
+                        <span id="class-label" class="value">--</span>
+                    </div>
+                    <div class="res-item">
+                        <span class="label">Confidence:</span>
+                        <div class="progress-container">
+                            <div id="conf-bar" class="progress-bar"></div>
+                            <span id="confidence-score" class="value">0%</span>
+                        </div>
+                    </div>
+                    <div class="res-item">
+                        <span class="label">System message:</span>
+                        <span id="result-message" class="value">--</span>
+                    </div>
+                </div>
+
+                <div id="disclaimer" class="disclaimer">
+                    <p>
+                        [Notice] <strong>Important notice:</strong><br>
+                        This system is for coursework demonstration only and must not be used as a medical diagnosis tool.
+                    </p>
+                </div>
+            </section>
+
+            <section class="history-layout">
+                <section class="history-card">
+                    <div class="section-header">
+                        <div>
+                            <h3>Detection history</h3>
+                            <p class="section-copy">Browse previous predictions saved on this computer.</p>
+                        </div>
+                        <button id="refresh-history-btn" class="btn-secondary">Refresh</button>
+                    </div>
+
+                    <p id="history-empty" class="empty-state">No detection history yet. Run a prediction to create one.</p>
+                    <div id="history-list" class="history-list"></div>
+                </section>
+
+                <section id="history-detail-card" class="history-card" hidden>
+                    <div class="section-header">
+                        <div>
+                            <h3>History detail</h3>
+                            <p class="section-copy">Inspect the stored image and prediction outcome.</p>
+                        </div>
+                        <button id="delete-history-btn" class="btn-secondary danger-btn">Delete</button>
+                    </div>
+
+                    <div class="history-detail">
+                        <img id="history-detail-image" class="history-detail-image" alt="History image preview">
+                        <div class="history-detail-meta">
+                            <div class="res-item">
+                                <span class="label">Stored at:</span>
+                                <span id="history-detail-time" class="value">--</span>
+                            </div>
+                            <div class="res-item">
+                                <span class="label">Original file:</span>
+                                <span id="history-detail-file" class="value">--</span>
+                            </div>
+                            <div class="res-item">
+                                <span class="label">Predicted class:</span>
+                                <span id="history-detail-label" class="value">--</span>
+                            </div>
+                            <div class="res-item">
+                                <span class="label">Confidence:</span>
+                                <span id="history-detail-confidence" class="value">--</span>
+                            </div>
+                            <div class="res-item">
+                                <span class="label">Status:</span>
+                                <span id="history-detail-status" class="value">--</span>
+                            </div>
+                            <div class="res-item">
+                                <span class="label">Message:</span>
+                                <span id="history-detail-message" class="value">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer>
+            <p>CDS540 Group Assignment | Local demo page served from FastAPI</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

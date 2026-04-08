@@ -1,0 +1,63 @@
+\section{Results and System Testing}
+
+The current model reaches 0.92 accuracy on the grouped test set, with macro F1 of 0.87 and weighted F1 of 0.92. These scores are strong overall, but they should be read with class-wise results because the dataset is imbalanced.
+
+\begin{table}[H]
+    \centering
+    \caption{Class-wise test performance on the grouped test set.}
+    \label{tab:classmetrics}
+    \begin{tabular}{lrrrr}
+        \toprule
+        Class & Precision & Recall & F1 & Support \\
+        \midrule
+        akiec & 0.86 & 0.82 & 0.84 & 66 \\
+        bcc   & 0.90 & 0.96 & 0.93 & 103 \\
+        bkl   & 0.92 & 0.83 & 0.87 & 220 \\
+        df    & 0.89 & 0.74 & 0.81 & 23 \\
+        mel   & 0.82 & 0.71 & 0.76 & 222 \\
+        nv    & 0.94 & 0.98 & 0.96 & 1{,}341 \\
+        vasc  & 1.00 & 0.86 & 0.93 & 29 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Figure~\ref{fig:confusion} and Figure~\ref{fig:perclass} show the same pattern from two views. Performance is strongest on the large nevus class, while melanoma remains the most difficult category and is still confused with nevus in a noticeable fraction of cases.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.80\textwidth]{confusion_matrix_normalized.png}
+    \caption{Normalized confusion matrix on the grouped test set.}
+    \label{fig:confusion}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.86\textwidth]{per_class_metrics.png}
+    \caption{Per-class precision, recall, and F1.}
+    \label{fig:perclass}
+\end{figure}
+
+The ROC and precision--recall curves provide a threshold-independent view of the same results. ROC curves remain strong across classes, while the precision--recall curves make the class imbalance more visible and show that \texttt{mel} is the least stable class as recall increases.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.86\textwidth]{roc_curves.png}
+    \caption{One-vs-rest ROC curves on the grouped test set.}
+    \label{fig:roc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.86\textwidth]{pr_curves.png}
+    \caption{One-vs-rest precision--recall curves.}
+    \label{fig:pr}
+\end{figure}
+
+Figure~\ref{fig:ui} shows the current front-end interface. In local checks, the service loaded the model correctly, returned a normal response from \texttt{/health}, and completed a full prediction request with stored history.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{ui_home_cropped.png}
+    \caption{Current front-end interface served by FastAPI.}
+    \label{fig:ui}
+\end{figure}

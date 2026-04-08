@@ -1,0 +1,9 @@
+\section{Discussion}
+
+The project has several clear strengths. It uses a real public dermoscopic dataset, removes the most obvious train--test leakage problem by grouping on lesion identifiers, and connects the classifier to a usable front end. The ResNet18 backbone and attention block also provide a practical balance between standard image classification design and local deployment.
+
+The main limitations are also clear. First, class imbalance remains substantial, and the gap in recall shows that not all diagnostic categories are treated equally. Second, the training workflow does not maintain a separate validation loop, which weakens model selection and makes older validation-style figures unusable for the current project state.
+
+Another limitation concerns result traceability. The current grouped split is cleaner than the older image-level split, but the provided weight file appears older than the latest regenerated data folders. The model should therefore be retrained on the exact current split before stronger empirical claims are made.
+
+Deployment logic also remains simple. The blank-image filter is a color heuristic rather than a learned out-of-distribution detector, the confidence threshold is not calibrated, and the interface does not yet provide richer audit features such as saved heatmaps or batch upload.

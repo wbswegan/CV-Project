@@ -1,0 +1,73 @@
+\section{Dataset Description, Cleaning, and Exploratory Analysis}
+
+The project uses the HAM10000 dermoscopic image collection \citep{tschandl2018ham10000}. The active pipeline reads the original image archive and \texttt{HAM10000\_metadata.csv}, reorganizes images into class folders, and loads them through \texttt{ImageFolder}. The alternative low-resolution CSV representations stored in the archive are not used by the current code.
+
+\begin{table}[H]
+    \centering
+    \caption{Dataset summary from the current repository.}
+    \label{tab:datasetsummary}
+    \begin{tabular}{>{\raggedright\arraybackslash}p{0.30\textwidth} >{\raggedright\arraybackslash}p{0.60\textwidth}}
+        \toprule
+        Item & Current dataset evidence \\
+        \midrule
+        Source dataset & HAM10000 \\
+        Original inputs & Two image folders and one metadata CSV \\
+        Active label field & \texttt{dx} \\
+        Final organization & \texttt{archive/Training} and \texttt{archive/Testing} class folders \\
+        Split method & Grouped by \texttt{lesion\_id}, stratified by \texttt{dx} \\
+        Training images & 8{,}011 \\
+        Testing images & 2{,}004 \\
+        Training lesions & 5{,}975 unique lesions \\
+        Testing lesions & 1{,}495 unique lesions \\
+        Leakage check & 0 image overlap, 0 lesion overlap \\
+        Original image size & \(600\times450\) \\
+        Metadata used & \texttt{lesion\_id}, \texttt{image\_id}, \texttt{dx}, \texttt{dx\_type}, \texttt{age}, \texttt{sex}, \texttt{localization} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The preparation script performs practical cleaning and reorganization rather than deep manual curation. It validates the input paths, reads the metadata file, builds a grouped split, recreates the output directories, and copies images into diagnosis-specific folders. Based on the available code and regenerated statistics, the current pipeline removes lesion-level leakage and aligns folder names with metadata labels. No explicit evidence of corrupted-image filtering, manual relabeling, or duplicate removal beyond grouped splitting was found in the repository.
+
+\begin{table}[H]
+    \centering
+    \caption{Seven lesion categories used in the classifier.}
+    \label{tab:categories}
+    \begin{tabular}{ll}
+        \toprule
+        Label & Full class name \\
+        \midrule
+        akiec & Actinic keratosis / intraepithelial carcinoma \\
+        bcc   & Basal cell carcinoma \\
+        bkl   & Benign keratosis-like lesion \\
+        df    & Dermatofibroma \\
+        mel   & Melanoma \\
+        nv    & Melanocytic nevus \\
+        vasc  & Vascular lesion \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The regenerated EDA shows strong class imbalance, with the nevus category dominating both training and testing, while Figure~\ref{fig:splitintegrity} confirms that train and test remain separate at both image and lesion levels. These properties directly affect evaluation because they reduce leakage but still leave a difficult class-frequency imbalance.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.84\textwidth]{class_distribution.png}
+    \caption{Class distribution in the grouped split.}
+    \label{fig:classdist}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.80\textwidth]{split_integrity.png}
+    \caption{Grouped split integrity check.}
+    \label{fig:splitintegrity}
+\end{figure}
+
+Figure~\ref{fig:gallery} shows representative examples from the seven categories. Several classes overlap in color, border quality, and internal texture, which helps explain why per-class evaluation remains necessary even when overall accuracy is high.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.70\textwidth]{sample_gallery.png}
+    \caption{Representative training examples from the seven classes.}
+    \label{fig:gallery}
+\end{figure}

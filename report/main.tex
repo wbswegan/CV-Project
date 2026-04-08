@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage[hypertexnames=false]{hyperref}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[numbers]{natbib}
+\usepackage{array}
+\usepackage[font=small]{caption}
+
+\setmainfont{Times New Roman}
+\defaultfontfeatures{Ligatures=TeX}
+
+\graphicspath{{figures/}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\urlstyle{same}
+\captionsetup{labelfont=normalfont,textfont=normalfont,skip=4pt}
+
+\begin{document}
+
+\begin{center}
+{\Large CDS540 Computer Vision Project Report\par}
+\vspace{0.35cm}
+{\LARGE Skin Lesion Classification with a Local Web Interface\par}
+\vspace{0.25cm}
+{\large Final Report\par}
+\end{center}
+\vspace{0.3cm}
+\begin{flushleft}
+{\normalsize
+Student: Lai BAO, Shujian LIU, Zehan ZHAO, Liwen ZHENG, Junhao DU, Peng LIU\par
+Tutor: Prof.\ Guo\par
+Date: April 2026\par
+}
+\end{flushleft}
+\vspace{0.6cm}
+
+\begin{abstract}
+This report presents a seven-class skin lesion classification system based on the HAM10000 dermoscopic image collection. The project combines grouped train--test preparation, a ResNet18 classifier with a squeeze-and-excitation style attention block, and a FastAPI interface for local inference. Images are reorganized from the metadata file into class folders, split by lesion identifier to reduce leakage, resized to \(224\times224\), normalized with ImageNet statistics, and augmented during training. The deployed interface supports upload, health checks, and local prediction history stored in SQLite. On the current grouped test set of 2{,}004 images, the provided model weights reach 0.92 accuracy, 0.87 macro F1, and 0.92 weighted F1. The report summarizes the system design, dataset preparation, exploratory analysis, evaluation results, and main limitations.
+\end{abstract}
+
+\input{sections/01_introduction}
+\input{sections/02_objectives}
+\input{sections/03_architecture}
+\input{sections/04_algorithm}
+\input{sections/05_dataset}
+\input{sections/06_setup}
+\input{sections/07_results}
+\input{sections/08_discussion}
+\input{sections/09_conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

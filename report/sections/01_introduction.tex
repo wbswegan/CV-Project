@@ -1,0 +1,5 @@
+\section{Introduction}
+
+Automatic analysis of dermoscopic images is an important problem in medical computer vision because early recognition of suspicious lesions can support screening and clinical review. The task remains challenging because several categories share similar colors, textures, and border patterns, while minority classes are much smaller than common benign categories \citep{esteva2017skin,tschandl2018ham10000}.
+
+This project addresses the problem as an end-to-end system rather than an offline benchmark only. The current implementation uses HAM10000, prepares a grouped split by lesion identifier, applies a ResNet18-based classifier with channel attention, and exposes prediction through a FastAPI interface with local history. The report focuses on the implemented pipeline, the prepared dataset, the observed results, and the main remaining limitations.

@@ -1,0 +1,12 @@
+\section{System Design and Architecture}
+
+The project is organized as an end-to-end system rather than a standalone training notebook. Original HAM10000 images and metadata are reorganized into grouped training and testing folders by \texttt{prepare\_data.py}. Offline training and evaluation are handled by \texttt{main.py}, while \texttt{app.py} loads the saved weight file for local inference and serves the browser interface, prediction endpoint, health check, and history API.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{system_architecture.png}
+    \caption{Project workflow for data preparation, model inference, and local history storage.}
+    \label{fig:architecture}
+\end{figure}
+
+Figure~\ref{fig:architecture} summarizes the workflow. The offline branch prepares the grouped split, trains the classifier, and saves the checkpoint. The online branch reuses that checkpoint in FastAPI, returns predictions to the browser, and stores recent outputs in SQLite.

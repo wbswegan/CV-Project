@@ -1,0 +1,26 @@
+.idea/
+.pytest_cache/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+*.log
+.Rhistory
+archive/
+data/
+figures/figures/
+models/brain_tumor_model.pth
+report/*.aux
+report/*.bbl
+report/*.blg
+report/*.log
+report/*.out
+report/main.pdf
+report/Report.pdf
+report/Computer vision project report.pdf
+report/main2fix.*
+report/main2tmp.*
+report/main2trim.*
+data/history.db
+data/history_images/
