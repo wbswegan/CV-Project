@@ -2,6 +2,11 @@
 
 This project is a local computer vision demo for classifying HAM10000 skin lesion images with an attention-enhanced ResNet18 model.
 
+## Project Depoly (UI For shown)
+
+<img width="1057" height="630" alt="image" src="https://github.com/user-attachments/assets/75dcbcc0-d59a-4310-9978-478be751eb94" />
+
+
 ## Project Structure
 
 ```text
